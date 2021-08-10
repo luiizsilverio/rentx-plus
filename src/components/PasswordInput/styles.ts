@@ -1,9 +1,9 @@
+import { TextInput } from 'react-native';
 import styled from 'styled-components/native'
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
   flex-direction: row;
-  margin-bottom: 8px;
 `;
 
 export const IconContainer = styled.View`
@@ -15,7 +15,7 @@ export const IconContainer = styled.View`
   margin-right: 4px;
 `;
 
-export const InputText = styled.TextInput`
+export const InputText = styled(TextInput)`
   flex: 1;
   background-color: ${props => props.theme.colors.background_secondary};
   color: ${props => props.theme.colors.text};
