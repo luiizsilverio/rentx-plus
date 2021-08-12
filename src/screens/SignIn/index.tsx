@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
+import * as yup from 'yup'
 
 import { 
   StatusBar, 
   KeyboardAvoidingView,
   Keyboard,
-  TouchableWithoutFeedback } from 'react-native'
+  TouchableWithoutFeedback, 
+  Alert
+} from 'react-native'
 
 import { Input } from '../../components/Input'
 import { PasswordInput } from '../../components/PasswordInput'
@@ -20,7 +23,33 @@ import {
   LoginButton 
 } from './styles'
 
-export function SignIn(){
+export function SignIn() {
+  const [email, setEmail] = useState('')
+  const [password, setpassword] = useState('')
+
+  async function handleSignIn() {    
+    const schema = yup.object().shape({
+      email: yup.string()
+        .required('E-mail obrigatório')
+        .email('Digite um e-mail válido'),
+      password: yup.string()
+        .required('A senha é obrigatória')        
+    })
+
+    try {
+      await schema.validate({ email, password })
+
+      // fazer login
+      
+    } catch (error) {
+      if (error instanceof yup.ValidationError) {
+        Alert.alert(error.message)
+      } else {
+        Alert.alert('Erro na autenticação')
+      }
+    }
+  }
+  
   return (
     <KeyboardAvoidingView 
       behavior="position" enabled
@@ -52,19 +81,23 @@ export function SignIn(){
             keyboardType="email-address"
             autoCorrect={false}
             autoCapitalize="none"
+            onChangeText={setEmail}
+            value={email}
           />
           <PasswordInput 
             iconName="lock"
             placeholder="Senha"
             secureTextEntry
+            onChangeText={setpassword}
+            value={password}
           />
         </Form>
 
         <Footer>
           <LoginButton 
             title="Login"
-            onPress={() => {}}
-            enabled={false}
+            onPress={handleSignIn}
+            enabled={true}
             loading={false}
           />
           <LoginButton 
