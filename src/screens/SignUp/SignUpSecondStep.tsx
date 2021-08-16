@@ -12,8 +12,8 @@ import { BackButton } from '../../components/BackButton'
 import { Bullet } from '../../components/Bullet'
 import { PasswordInput } from '../../components/PasswordInput'
 import { Button } from '../../components/Button'
-import { Confirmation } from '../Confirmation'
 import { useTheme } from 'styled-components'
+import api from '../../services/api'
 
 import { 
   Container, 
@@ -24,7 +24,6 @@ import {
   Form,
   FormTitle  
 } from './styles'
-import theme from '../../styles/theme'
 
 interface Params {
   user: {
@@ -38,12 +37,13 @@ export function SignUpSecondStep() {
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   
+  const theme = useTheme()
   const navigation = useNavigation()
   const route = useRoute()
 
   const { user } = route.params as Params
 
-  function handleRegister() {
+  async function handleRegister() {
     if (!password || !passwordConfirm) {
       return Alert.alert('Informe a senha e a confirmação')
     }
@@ -51,12 +51,23 @@ export function SignUpSecondStep() {
       return Alert.alert('Senhas não conferem')
     }
 
-    // Enviar para API e cadastrar
-    navigation.navigate('Confirmation', {
-      title: "Conta Criada!",
-      message: "Agora é só fazer login \n e aproveitar.",
-      nextScreen: "SignIn"
-    })    
+    await api.post('/users/', {
+      name: user.name,
+      email: user.email,
+      driver_license: user.cnh,
+      password
+    })
+    .then(() => {
+      navigation.navigate('Confirmation', {
+        title: "Conta Criada!",
+        message: "Agora é só fazer login \n e aproveitar.",
+        nextScreen: "SignIn"
+      })    
+    })
+    .catch((error) => {
+      console.log(error)
+      Alert.alert('Erro', 'Não foi possível cadastrar')
+    })
   }
 
   return (

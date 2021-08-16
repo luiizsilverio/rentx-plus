@@ -13,6 +13,7 @@ import { BackButton } from '../../components/BackButton'
 import { Bullet } from '../../components/Bullet'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
+import { useAuth } from '../../hooks/auth'
 
 import { 
   Container, 
@@ -30,6 +31,7 @@ export function SignUpFirstStep(){
   const [cnh, setCnh] = useState('')
 
   const navigation = useNavigation()
+  const { user } = useAuth()
  
   async function handleNextStep() {
     try {

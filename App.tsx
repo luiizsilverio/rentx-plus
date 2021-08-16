@@ -6,6 +6,7 @@ import { LogBox } from 'react-native'
 
 import { ThemeProvider } from 'styled-components'
 import { Routes } from './src/routes'
+import { AuthProvider } from './src/hooks/auth'
 
 import { 
   Inter_400Regular,
@@ -37,8 +38,10 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>            
-      <Routes />
+    <ThemeProvider theme={theme}>    
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>        
     </ThemeProvider>
   );
 }
