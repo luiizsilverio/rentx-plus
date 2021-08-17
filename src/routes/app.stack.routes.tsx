@@ -7,37 +7,17 @@ import { Schedule } from '../screens/Schedule'
 import { ScheduleDetails } from '../screens/ScheduleDetails'
 import { Confirmation } from '../screens/Confirmation'
 import { MyCars } from '../screens/MyCars'
-import { Splash } from '../screens/Splash'
-import { SignIn } from '../screens/SignIn'
-import { SignUpFirstStep } from '../screens/SignUp/SignUpFirstStep'
-import { SignUpSecondStep } from '../screens/SignUp/SignUpSecondStep'
 
 const { Navigator, Screen } = createStackNavigator()
 
-// Rotas públicas *****
-export function StackRoutes() {
+// Rotas autenticadas
+export function AppStackRoutes() {
   return (
-    <Navigator headerMode="none" initialRouteName="SignIn">
-      <Screen 
-        name="Splash"
-        component={Splash}        
-      />
-      <Screen 
-        name="SignIn"
-        component={SignIn}
-      />
-      <Screen 
-        name="SignUpFirstStep"
-        component={SignUpFirstStep}
-      />
-       <Screen 
-        name="SignUpSecondStep"
-        component={SignUpSecondStep}
-      />
+    <Navigator headerMode="none" initialRouteName="Home">      
       <Screen 
         name="Home"
-        component={Home}
-      />
+        component={Home}        
+      />      
       <Screen 
         name="CarDetails"
         component={CarDetails}
@@ -61,3 +41,9 @@ export function StackRoutes() {
     </Navigator>
   )
 }
+
+{/* <Screen 
+      name="Splash"
+      component={Splash}        
+    /> */}
+    

@@ -11,7 +11,7 @@ export function Splash(){
   
   useState(() => {
     function startApp() {
-      navigation.navigate('Home')
+      navigation.navigate('SignIn')
     }
 
     setTimeout(() => {

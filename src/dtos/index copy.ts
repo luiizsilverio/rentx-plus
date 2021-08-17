@@ -3,17 +3,15 @@ export interface CarData {
   brand: string
   name: string
   about: string
-  period: string
-  price: number
+  rent: {
+    period: string
+    price: number
+  }
   fuel_type: string
   thumbnail: string
   accessories: {
-    id: string
     type: string
     name: string
   }[]
-  photos: {
-    id: string;
-    photo: string
-  }[]
+  photos: string[]
 }

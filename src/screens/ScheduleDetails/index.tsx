@@ -55,7 +55,7 @@ export function ScheduleDetails() {
   const dt1 = formatDate(dates[0])
   const dt2 = formatDate(dates[dates.length - 1])
 
-  const rentTotal = Number(dates.length * car.rent.price)
+  const rentTotal = Number(dates.length * car.price)
   
   async function handleConfirmRental() {
     setLoading(true)
@@ -107,8 +107,8 @@ export function ScheduleDetails() {
           </Description>
         
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
           </Rent>
         </Details>
 
@@ -153,7 +153,7 @@ export function ScheduleDetails() {
         <RentalPrice>
           <RentalPriceLabel>total</RentalPriceLabel>
           <RentalPriceDetails>
-            <RentalPriceQuota>{`R$ ${car.rent.price} x${dates.length} diárias`}</RentalPriceQuota>            
+            <RentalPriceQuota>{`R$ ${car.price} x${dates.length} diárias`}</RentalPriceQuota>            
           <RentalPriceTotal>R$ { rentTotal }</RentalPriceTotal>
           </RentalPriceDetails>
         </RentalPrice>
